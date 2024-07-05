@@ -1,0 +1,38 @@
+const express = require('express');
+const pool = require('./db');
+const router = express.Router();
+
+// Get all countries
+router.get('/countries', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM Country');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Get all cities
+router.get('/cities', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM City');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Get all airports
+router.get('/airports', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM Airport');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+module.exports = router;
